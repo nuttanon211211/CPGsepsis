@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+  </head>
+  <body>
+    <header>
+    <style>
+    body {
+     border: solid black;
+     background-color: #fcff90;
+    }
+    p {
+    border: solid black 1px;
+    }
+    a:link, a:visited {
+     background-color: #b9fff2;
+     color: black;
+     border: 2px solid #183c00;
+     padding: 10px 20px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-weight: bolder;
+     border-radius: 30px;
+    }
+
+   a:hover, a:active {
+     background-color: #183c00;
+     color: white;
+    }
+    a.color {
+      color: red;
+    }
+    </style>
+    <script>
+
+      function calSIRS() {
+        let count = 0;
+        for (let i = 1;i < 5;i++) {
+          if (document.getElementById("sir"+String(i)).checked) {
+            count++;
+          }
+        }
+
+        if (count >= 2) {
+          document.getElementById("out1").innerHTML = "แปลผล: [<a class='color'>เป็น SIRS</a>]";
+
+        }
+        else {
+          document.getElementById("out1").innerHTML = "แปลผล: [<a class='color'>ไม่เป็น SIRS</a>]";
+
+        }
+        calSS();
+
+      }
+
+      function calSorce() {
+        let count = 0;
+        let array = document.getElementsByName("sor");
+        for (let i = 0;i < array.length ;i++) {
+          if(array[i].checked) {
+            count++;
+          }
+        }
+
+        if (count>0) {
+          document.getElementById("out2").innerHTML = "แปลผล: [<a class='color'>พบ Source</a>]";
+
+        }
+        else {
+          document.getElementById("out2").innerHTML = "แปลผล: [<a class='color'>ไม่พบ Source</a>]";
+
+        }
+        calSS();
+
+
+      }
+
+      function calSS() {
+        let count = 0;
+        let count2 = 0;
+        let count3 = 0;
+
+        let array = document.getElementsByName("ss");
+        for (let i = 0;i < array.length ;i++) {
+          if(array[i].checked) {
+            count++;
+          }
+        }
+
+        for (let i = 1;i < 5;i++) {
+          if (document.getElementById("sir"+String(i)).checked) {
+            count2++;
+          }
+        }
+
+        let array2 = document.getElementsByName("sor");
+        for (let i = 0;i < array2.length ;i++) {
+          if(array2[i].checked) {
+            count3++;
+          }
+        }
+
+        if (count>0 && count2 >=2 && count3>0) {
+          document.getElementById("out3").innerHTML = "แปลผล: [<a class='color'>เป็น Severe Sepsis</a>]";
+          document.getElementById("out5").innerHTML = "ผู้ป่วย severe sepsis";
+
+        }
+        else {
+          document.getElementById("out3").innerHTML = "แปลผล: [<a class='color'>ไม่เป็น Severe Sepsis</a>]";
+          document.getElementById("out5").innerHTML = "ผู้ป่วย ";
+
+        }
+        calSSH();
+
+      }
+
+      function calSSH() {
+        let count0 = 0;
+        let count = 0;
+        let count2 = 0;
+        let count3 = 0;
+
+        let array0 = document.getElementsByName("ssh");
+        for (let i = 0;i < array0.length ;i++) {
+          if(array0[i].checked) {
+            count0++;
+          }
+        }
+
+        let array = document.getElementsByName("ss");
+        for (let i = 0;i < array.length ;i++) {
+          if(array[i].checked) {
+            count++;
+          }
+        }
+
+        for (let i = 1;i < 5;i++) {
+          if (document.getElementById("sir"+String(i)).checked) {
+            count2++;
+          }
+        }
+
+        let array2 = document.getElementsByName("sor");
+        for (let i = 0;i < array2.length ;i++) {
+          if(array2[i].checked) {
+            count3++;
+          }
+        }
+
+        if (count>0 && count2 >=2 && count3>0) {
+
+          document.getElementById("out5").innerHTML = "ผู้ป่วย severe sepsis";
+
+        } else {
+          document.getElementById("out5").innerHTML = "ผู้ป่วย ";
+
+        }
+
+        if (count>0 && count2 >=2 && count3>0 && count0>0) {
+          document.getElementById("out4").innerHTML = "แปลผล: [<a class='color'>เป็น Septic Shock</a>]";
+          document.getElementById("out5").innerHTML = "ผู้ป่วย septic shock";
+
+        }
+        else {
+          document.getElementById("out4").innerHTML = "แปลผล: [<a class='color'>ไม่เป็น Septic Shock</a>]";
+
+        }
+
+      }
+
+
+    </script>
+
+    </header>
+    <main>
+    <h2>ผังแนวทางดูแลการรักษา (CPG) ผู้ป่วยผู้ใหญ่ที่มีภาวะ severe sepsis/septic shock*</h2>
+    <h3>แนวทางการคัดกรองและวินิจฉัยผู้ป่วยผู้ใหญ่ที่มีภาวะ severe sepsis/septic shock มีดังนี้</h3>
+    HN <input><br>
+    <input type="date" name="bday">
+    <p>1.SIRS</p>
+
+
+
+      &emsp;<input type="checkbox" id="sir1" onclick="calSIRS()">อุณหภูมิกายมากกว่า 38°C หรือน้อยกว่า 36°C <br>
+      &emsp;<input type="checkbox" id="sir2" onclick="calSIRS()">ชีพจรเร็วกว่า 90 ครั้ง/นาที<br>
+      &emsp;<input type="checkbox" id="sir3" onclick="calSIRS()">หายใจเร็วกว่า 20 ครั้ง/นาที<br>
+      &emsp;<input type="checkbox" id="sir4" onclick="calSIRS()">เม็ดเลือดขาวมากกว่า 12,000 มม.<sup>3</sup> หรือน้อยกว่า 4,000 มม.<sup>3</sup>
+      <p id="out1">แปลผล: [] </p>
+
+    <p>2.Source</p>
+      &emsp;<input type="checkbox" name="sor" onclick="calSorce()">Pneumonia<br>
+      &emsp;<input type="checkbox" name="sor" onclick="calSorce()">Urinary tract Infection<br>
+      &emsp;<input type="checkbox" name="sor" onclick="calSorce()">Intra-abdominal infection<br>
+
+      &emsp;<input type="checkbox" name="sor" onclick="calSorce()">Skin and soft tissue infection<br>
+      &emsp;<input type="checkbox" name="sor" onclick="calSorce()">CNS infection<br>
+      &emsp;<input type="checkbox" name="sor" onclick="calSorce()">Others ...............<br>
+      &emsp;<input type="checkbox" name="sor" onclick="calSorce()">ยังระบุแหล่งติดเชื้อไม่ได้แน่ชัด
+      <p id="out2">แปลผล: [] </p>
+
+    <p>3.การวินิจฉัยภาวะ severe sepsis/septic shock</p>
+    <p>&emsp;3.1. ภาวะ severe sepsis ประกอบด้วยลักษณะตรงตามข้อ 1 และ 2 ร่วมกับภาวะต่อไปนี้อย่างน้อย 1 หัวข้อ</p>
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">Mottled skin<br>
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">Capillary refilling time มากกว่าหรือเท่ากับ 3 วินาที<br>
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">Urine Output น้อยกว่า 0.5 มล/กก/ชั่วโมง<br>
+
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">สับสน (abrupt change in mental status)<br>
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">Acute respiratory distress syndrome (ARDS)<br>
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">Platelet counts น้อยกว่า 100,000ตัว/มม.<sup>3</sup><br>
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">Disseminated Intravascular Coagulation<br>
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">Latate มากกว่า 2 มิลลิโมล/ลิตร (18 มิลลิกรัม/เดซิลิตร)<br>
+      &emsp;<input type="checkbox" name="ss" onclick="calSS()">Systolic blood pressure ต่ำกว่า 90 มม.ปรอท หรือความดันโลหิตเฉลี่ย (Mean arterial pressure : MAP) น้อยกว่า 65 มม.ปรอท
+
+      <p id="out3">แปลผล: [] </p>
+
+
+    <p>&emsp;3.2. ภาวะ septic shock มีลักษณะตรงตามข้อ 3.1 อย่างน้อย 1 ข้อ ร่วมกับ</p>
+    &emsp;<input type="checkbox" name="ssh" onclick="calSSH()">Systolic blood pressure ต่ำกว่า 90 มม.ปรอท หรือ MAP น้อยกว่า 65 มม.ปรอทหลังจากได้สารน้ําประเภท crystalloid ไม่น้อยกว่า 40-60 มล. ต่อน้ําหนักตัวหนึ่งกก. หรือสารน้ําประเภท colloid ไม่น้อยกว่า 20-30 มล.ต่อน้ําหนักตัวหนึ่งกก<br>
+      &emsp;<input type="checkbox" name="ssh" onclick="calSSH()">ต้องการ Dopamine มากกว่า 5 ไมโครกรัม/น้ําหนักตัวหนึ่งกก./นาที หรือ Norepinephine หรือ Epinephrine มากกว่า 0.02 ไมโครกรัม/น้ําหนักตัวหนึ่งกก./นาที เพื่อรักษาระดับ MAP ให้มากกว่า 65 มม.ปรอท<br>
+
+      <p id="out4">แปลผล: [] </p>
+
+
+    <p>4. วิธีการวินิจฉัยเชื้อก่อโรคทางห้องปฏิบัติการจุลชีววิทยา</p>
+      <input type="checkbox">Hemoculture (ดูแนวทางการเพาะเชื้อจากเลือด) เจาะวันที่ <input type="date" name="bday"> จํานวน <input type="number">  ขวด <br>
+&emsp;ขวดที่ 1 เวลา <input type="time"> น. ตําแหน่งที่เจาะ <input><br>
+&emsp;ขวดที่ 2 เวลา <input type="time"> น. ตําแหน่งที่เจาะ <input><br>
+&emsp;ขวดที่ 3 เวลา <input type="time"> น. ตําแหน่งที่เจาะ <input><br>
+<br>
+      <input type="checkbox">Urine culture (ดูแนวทางการเก็บปัสสาวะส่งตรวจเพาะเชื้อ)<br>
+      <ul>
+      <input type="radio" name="r1">Midstream urine (กรณีปัสสาวะเองได้)<br>
+      <input type="radio" name="r1">Catheter urine<br>
+      <input type="radio" name="r1">In and out urine
+      </ul>
+      <input type="checkbox">CSF culture<br>
+      <input type="checkbox">Sputum culture<br>
+
+      <input type="checkbox">Pus culture (site<input>)<br>
+      <input type="checkbox">Others <input>
+
+
+      <p id="out5">ผู้ป่วย </p>
+      วินิจฉัยเวลา <input type="time" id="appt" name="appt" required> น. (โดยแพทย์)<br>
+      Hemoculture เวลา <input type="time" id="appt2" name="appt2" required> น.<br><br>
+
+    <a href="4.html">Hemodynamic support</a><br>
+
+    <a href="3.html">พบหรือสงสัยแหล่งติดเชื้อ source</a> <br>
+    <a href="2.html">พิจารณา Organ and metabolic support</a>
+
+    </main>
+    <footer></footer>
+  </body>
+</html>
